@@ -1,0 +1,45 @@
+
+body {
+  background-color: #111;
+  color: #eee;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+.track {
+  background: #222;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+.track img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+button {
+  background: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+a {
+  color: #0bf;
+  display: inline-block;
+  margin-top: 10px;
+}
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
