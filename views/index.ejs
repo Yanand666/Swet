@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>🎵 Sweet Music</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>🎧 Sweet Music</h1>
+  <form method="get" action="/">
+    <input type="text" name="q" placeholder="Пошук за назвою або виконавцем">
+    <button type="submit">🔍</button>
+    <a href="/upload">Завантажити</a>
+  </form>
+
+  <% if (tracks.length === 0) { %>
+    <p>Немає треків 💤</p>
+  <% } %>
+
+  <ul>
+    <% tracks.forEach(track => { %>
+      <li>
+        <% if (track.cover) { %>
+          <img src="<%= track.cover %>" alt="cover" width="50">
+        <% } %>
+        <strong><%= track.title %></strong> – <%= track.artist %>  
+        (<%= track.plays %> прослуховувань)<br>
+        <audio controls onplay="fetch('/play/<%= track.id %>', { method: 'POST' })">
+          <source src="<%= track.music %>" type="audio/mpeg">
+        </audio>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

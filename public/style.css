@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #fff;
+  padding: 20px;
+}
+input, button {
+  margin: 5px;
+  padding: 8px;
+}
+audio {
+  margin-top: 5px;
+}
+img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
