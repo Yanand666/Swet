@@ -1,0 +1,38 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+}
+input, button {
+  margin: 8px;
+  padding: 8px;
+  font-size: 16px;
+}
+a {
+  color: #0ff;
+  text-decoration: none;
+}
+.track {
+  margin: 15px auto;
+  padding: 10px;
+  background: #222;
+  border-radius: 10px;
+  max-width: 400px;
+}
+.track img {
+  width: 100%;
+  border-radius: 10px;
+}
+audio {
+  width: 100%;
+}
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  .track {
+    max-width: 95%;
+  }
+}
