@@ -10,7 +10,7 @@
   <form method="POST" enctype="multipart/form-data">
     <input type="text" name="title" placeholder="Назва треку" required />
     <input type="text" name="artist" placeholder="Виконавець" required />
-    <input type="file" name="music" accept="audio/*" required />
+    <input type="file" name="music" accept="audio/mpeg,audio/wav,audio/ogg" capture>
     <input type="file" name="cover" accept="image/*" />
     <button type="submit">Завантажити</button>
   </form>
