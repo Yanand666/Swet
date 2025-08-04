@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Завантажити трек</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>➕ Завантажити трек</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input name="title" placeholder="Назва" required><br>
+    <input name="artist" placeholder="Виконавець" required><br>
+    <input type="file" name="music" accept="audio/*" required><br>
+    <input type="file" name="cover" accept="image/*"><br>
+    <button type="submit">⬆ Завантажити</button>
+    <a href="/">← Назад</a>
+  </form>
+</body>
+</html>

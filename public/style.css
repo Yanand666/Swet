@@ -1,0 +1,27 @@
+body {
+  background-color: #111;
+  color: #eee;
+  font-family: sans-serif;
+  padding: 20px;
+}
+a, button {
+  background: #222;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+input, select {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+img.cover {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+audio {
+  width: 100%;
+}
