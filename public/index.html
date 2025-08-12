@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sweet</title>
+<style>
+  body {
+    margin:0; padding:0;
+    background: #0a0a0a; color: #f44336;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+  header {
+    background: #120000;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f44336;
+  }
+  nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  nav a, nav button {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  nav a:hover, nav button:hover {
+    background: #d32f2f;
+  }
+  main {
+    padding: 20px;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .track-list {
+    list-style: none;
+    padding: 0;
+  }
+  .track-list li {
+    background: #120000;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .track-list li:hover {
+    background: #330000;
+  }
+  .track-list li.active {
+    background: #f44336;
+    color: white;
+  }
+  audio {
+    width: 100%;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">sweet</div>
+  <nav>
+    <a href="#">Головна</a>
+    <a href="#">Каталог</a>
+    <a href="#">Про нас</a>
+    <button id="uploadBtn">Завантажити свій трек</button>
+    <input type="file" id="uploadInput" accept="audio/*" />
+  </nav>
+</header>
+    <div style="text-align:center; margin:20px 0;">
+        <img src="bear.jpeg" alt="Sweet Bear" style="max-width:250px; width:100%; border-radius:10px;">
+    </div>
+    
+
+<main>
+  <h2>Мої треки</h2>
+  <ul id="trackList" class="track-list"></ul>
+  <audio id="audioPlayer" controls preload="none">
+    Ваш браузер не підтримує аудіо.
+  </audio>
+</main>
+
+<script>
+  const uploadBtn = document.getElementById('uploadBtn');
+  const uploadInput = document.getElementById('uploadInput');
+  const trackList = document.getElementById('trackList');
+  const audioPlayer = document.getElementById('audioPlayer');
+  const tracks = [];
+
+  uploadBtn.addEventListener('click', () => uploadInput.click());
+
+  uploadInput.addEventListener('change', (e) => {
+    const files = e.target.files;
+    for (let file of files) {
+      if (file.type.startsWith('audio/')) {
+        const url = URL.createObjectURL(file);
+        const track = { name: file.name, url };
+        tracks.push(track);
+        addTrackToList(track, tracks.length - 1);
+      }
+    }
+    uploadInput.value = '';
+  });
+
+  function addTrackToList(track, index) {
+    const li = document.createElement('li');
+    li.textContent = track.name;
+    li.dataset.index = index;
+    li.addEventListener('click', () => playTrack(index));
+    trackList.appendChild(li);
+  }
+
+  function playTrack(index) {
+    document.querySelectorAll('.track-list li').forEach(li => li.classList.remove('active'));
+    const activeLi = trackList.querySelector(`li[data-index="${index}"]`);
+    if (activeLi) activeLi.classList.add('active');
+    audioPlayer.src = tracks[index].url;
+    audioPlayer.play();
+  }
+</script>
+
+</body>
+</html>
