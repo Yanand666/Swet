@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог - Sweet</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>Каталог Sweet</header>
+<nav>
+    <a href="index.html">Головна</a>
+    <a href="about.html">Про нас</a>
+</nav>
+<div class="container">
+    <h2>Список треків</h2>
+    <div id="trackList"></div>
+</div>
+<script>
+fetch('/tracks').then(res => res.json()).then(tracks => {
+    const list = document.getElementById('trackList');
+    if(tracks.length === 0) {
+        list.innerHTML = '<p>Немає треків</p>';
+    } else {
+        tracks.forEach(track => {
+            const div = document.createElement('div');
+            div.className = 'track';
+            div.innerHTML = `<p>${track}</p><audio controls src="uploads/${track}"></audio>`;
+            list.appendChild(div);
+        });
+    }
+});
+</script>
+</body>
+</html>

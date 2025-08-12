@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Music</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<header>Sweet</header>
+<nav>
+    <a href="catalog.html">Каталог</a>
+    <a href="about.html">Про нас</a>
+</nav>
+<div class="container">
+    <h2>Завантажити трек</h2>
+    <form id="uploadForm" onsubmit="uploadTrack(event)" enctype="multipart/form-data">
+        <input type="file" name="track" accept="audio/*" required>
+        <button type="submit">Завантажити</button>
+    </form>
+</div>
+</body>
+</html>
