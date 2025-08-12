@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sweet Music App</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header><h1>Sweet Music</h1></header>
+  <main>
+    <section class="upload-section">
+      <h2>Завантажити трек</h2>
+      <form id="uploadForm">
+        <input type="file" id="fileInput" name="track" accept="audio/*" required />
+        <button type="submit">Завантажити</button>
+      </form>
+      <div id="uploadStatus"></div>
+    </section>
+    <section class="tracks-section">
+      <h2>Мої треки</h2>
+      <ul id="tracksList"></ul>
+    </section>
+  </main>
+<script src="app.js"></script>
+</body>
+</html>
