@@ -2,26 +2,47 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>Sweet Music App</title>
-<link rel="stylesheet" href="styles.css" />
+<style>
+  body {
+    margin: 0; padding: 0; font-family: Arial, sans-serif; background: #121212; color: #eee;
+  }
+  header {
+    background: #1DB954; padding: 15px; text-align: center; font-size: 1.5rem; font-weight: bold;
+  }
+  nav {
+    display: flex; justify-content: center; gap: 15px; background: #222; padding: 10px 0;
+  }
+  nav a {
+    color: #eee; text-decoration: none; font-weight: 600;
+  }
+  nav a:hover {
+    color: #1DB954;
+  }
+  main {
+    padding: 15px;
+  }
+  .track {
+    background: #222; margin-bottom: 10px; padding: 10px; border-radius: 6px;
+  }
+  @media (max-width: 600px) {
+    body { font-size: 14px; }
+    header { font-size: 1.2rem; }
+  }
+</style>
 </head>
 <body>
-  <header><h1>Sweet Music</h1></header>
-  <main>
-    <section class="upload-section">
-      <h2>Завантажити трек</h2>
-      <form id="uploadForm">
-        <input type="file" id="fileInput" name="track" accept="audio/*" required />
-        <button type="submit">Завантажити</button>
-      </form>
-      <div id="uploadStatus"></div>
-    </section>
-    <section class="tracks-section">
-      <h2>Мої треки</h2>
-      <ul id="tracksList"></ul>
-    </section>
-  </main>
-<script src="app.js"></script>
+<header>Sweet Music App</header>
+<nav>
+  <a href="#">Головна</a>
+  <a href="#">Каталог</a>
+  <a href="#">Про нас</a>
+</nav>
+<main>
+  <div class="track">Трек 1 - Виконавець</div>
+  <div class="track">Трек 2 - Виконавець</div>
+  <div class="track">Трек 3 - Виконавець</div>
+</main>
 </body>
 </html>
