@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sweet — головна</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="/">sweet</a>
+    <nav class="nav">
+      <a class="btn" href="catalog.html">Каталог</a>
+      <a class="btn" href="about.html">Про нас</a>
+      <button class="btn outline" id="openUploader">Завантажити трек</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="bear-wrap">
+      <img src="images/bear.jpeg" alt="Sweet Bear" class="bear"/>
+    </div>
+
+    <section class="uploader" id="uploader" hidden>
+      <h2>Завантажити свій трек</h2>
+      <form id="uploadForm">
+        <input type="file" name="track" id="trackFile" accept="audio/*" required />
+        <button type="submit" class="btn">Завантажити</button>
+        <button type="button" class="btn ghost" id="closeUploader">Скасувати</button>
+      </form>
+      <p class="hint">Після завантаження трек автоматично з’явиться у каталозі та в списку нижче.</p>
+    </section>
+
+    <section>
+      <h2>Останні треки</h2>
+      <div id="recentTracks" class="tracks"></div>
+    </section>
+  </main>
+</body>
+</html>
