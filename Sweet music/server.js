@@ -6,14 +6,21 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Перевіряємо чи існує папка uploads
+const uploadsDir = path.join(__dirname, 'public', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 // Видаємо статичні файли з /public
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Налаштування зберігання файлів (у /public/uploads)
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, 'public', 'uploads')),
+  destination: (req, file, cb) => cb(null, uploadsDir),
   filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
+
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
@@ -25,21 +32,22 @@ const upload = multer({
 // Завантаження треку
 app.post('/upload', upload.single('track'), (req, res) => {
   if (!req.file) return res.status(400).send('Файл не отримано');
-  res.status(200).send('OK');
+  res.redirect('/'); // Повертаємось на головну після завантаження
 });
 
 // Список треків (імена файлів)
 app.get('/tracks', (req, res) => {
-  const dir = path.join(__dirname, 'public', 'uploads');
-  fs.readdir(dir, (err, files) => {
+  fs.readdir(uploadsDir, (err, files) => {
     if (err) return res.json([]);
-    // Повертаємо за часом додавання (нові зверху)
-    files.sort((a, b) => {
-      const aT = fs.statSync(path.join(dir, a)).mtimeMs;
-      const bT = fs.statSync(path.join(dir, b)).mtimeMs;
-      return bT - aT;
-    });
-    res.json(files);
+    // Повертаємо тільки аудіо та сортуємо (нові зверху)
+    const audioFiles = files
+      .filter(f => /\.(mp3|wav|ogg)$/i.test(f))
+      .sort((a, b) => {
+        const aT = fs.statSync(path.join(uploadsDir, a)).mtimeMs;
+        const bT = fs.statSync(path.join(uploadsDir, b)).mtimeMs;
+        return bT - aT;
+      });
+    res.json(audioFiles);
   });
 });
 
