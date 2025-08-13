@@ -14,6 +14,7 @@ if (!fs.existsSync(uploadsDir)) {
 
 // Видаємо статичні файли з /public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json()); // для роботи з JSON в DELETE запитах
 
 // Налаштування зберігання файлів (у /public/uploads)
 const storage = multer.diskStorage({
@@ -39,7 +40,6 @@ app.post('/upload', upload.single('track'), (req, res) => {
 app.get('/tracks', (req, res) => {
   fs.readdir(uploadsDir, (err, files) => {
     if (err) return res.json([]);
-    // Повертаємо тільки аудіо та сортуємо (нові зверху)
     const audioFiles = files
       .filter(f => /\.(mp3|wav|ogg)$/i.test(f))
       .sort((a, b) => {
@@ -48,6 +48,24 @@ app.get('/tracks', (req, res) => {
         return bT - aT;
       });
     res.json(audioFiles);
+  });
+});
+
+// Видалення треку
+app.delete('/tracks/:name', (req, res) => {
+  const trackName = req.params.name;
+  const trackPath = path.join(uploadsDir, trackName);
+
+  if (!fs.existsSync(trackPath)) {
+    return res.status(404).send('Трек не знайдено');
+  }
+
+  fs.unlink(trackPath, err => {
+    if (err) {
+      console.error('Помилка при видаленні файлу:', err);
+      return res.status(500).send('Не вдалося видалити трек');
+    }
+    res.status(200).send('Трек видалено');
   });
 });
 
