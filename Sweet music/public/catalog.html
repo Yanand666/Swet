@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sweet — каталог</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="/">sweet</a>
+    <nav class="nav">
+      <a class="btn current" href="catalog.html">Каталог</a>
+      <a class="btn" href="about.html">Про нас</a>
+      <a class="btn outline" href="index.html">Завантажити трек</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Каталог треків</h1>
+    <div id="catalogTracks" class="tracks"></div>
+  </main>
+
+  <script>
+    async function loadCatalog() {
+      const res = await fetch('/tracks');
+      const files = await res.json();
+      const wrap = document.getElementById('catalogTracks');
+      wrap.innerHTML = '';
+      if (!files || !files.length) {
+        wrap.innerHTML = '<p class="muted">Немає треків</p>';
+        return;
+      }
+      files.forEach(name => {
+        const card = document.createElement('div');
+        card.className = 'track-card';
+        card.innerHTML = `
+          <div class="track-name">${name}</div>
+          <audio controls src="uploads/${name}"></audio>
+        `;
+        wrap.appendChild(card);
+      });
+    }
+    loadCatalog();
+    // Автооновлення щопівхвилини
+    setInterval(loadCatalog, 30000);
+  </script>
+</body>
+</html>
